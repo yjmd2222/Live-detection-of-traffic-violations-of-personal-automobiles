@@ -1,12 +1,13 @@
 'YOLO PM detection input .txt 파일 생성'
 import os
 import json
+import re
 
 def convert_to_yolo_det(bbox, image_width, image_height):
     'AI-Hub 제공 .json 파일 xywh 좌표 YOLO 형식으로 변환'
     x_min, y_min, width, height = bbox
-    center_x = (x_min + width/2) / 2
-    center_y = (y_min + height/2) / 2
+    center_x = x_min + width / 2
+    center_y = y_min + height / 2
 
     # 좌표를 정규화
     yolo_center_x = center_x / image_width
@@ -44,7 +45,7 @@ def convert_to_yolo_txt_det(folder_path):
             # 개별 JSON 파일에 해당하는 출력 파일 생성
             with open(output_file, 'w') as txt_file:
                 for pm_code, bbox in yolo_bboxes:
-                    yolo_bbox_str = ' '.join([str(val) for val in bbox])
+                    yolo_bbox_str = re.sub(r'[^\d.\s]', '', str(bbox))
                     txt_file.write(f"{pm_code} {yolo_bbox_str}\n")
                 
                 if count % 100 == 0:
