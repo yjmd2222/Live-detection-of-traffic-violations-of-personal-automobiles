@@ -16,15 +16,16 @@ def restructure_aihub_data(data_root):
     for count, (root, _, files) in enumerate(os.walk(data_root)):
         for inner_count, file in enumerate(files):
             if '.json' in file:
-                new_parent_path = 'labels'
+                new_parent_path = 'labels_json'
             elif '.jpg' in file or '.jpeg' in file:
                 new_parent_path = 'images'
             try:
                 os.replace(os.path.join(root, file), os.path.join(data_root, new_parent_path, file))
             except UnboundLocalError:
                 continue
-            if inner_count % 100 == 0:
-                print(f'{count} 구조 안 {inner_count}번째 파일: {file}')
+            else:
+                if inner_count % 100 == 0:
+                    print(f'{count} 구조 안 {inner_count}번째 파일: {file}')
 
     print('디렉터리 구조 변경 완료')
 

@@ -38,7 +38,7 @@ def convert_to_yolo_txt_det(folder_path):
                 yolo_bboxes.append((annotation['PM_code'], yolo_bbox))
 
             # 새로운 경로 설정
-            new_labels_path = os.path.join(os.path.dirname(folder_path), 'labels')
+            new_labels_path = os.path.join(os.path.dirname(folder_path), 'labels_det')
             os.makedirs(new_labels_path, exist_ok=True)
             output_file = os.path.join(new_labels_path, os.path.splitext(filename)[0] + ".txt")
 
