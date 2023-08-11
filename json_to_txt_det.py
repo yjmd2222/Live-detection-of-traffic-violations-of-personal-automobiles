@@ -18,6 +18,7 @@ def convert_to_yolo_det(bbox, image_width, image_height):
 
 def convert_to_yolo_txt_det(folder_path):
     'AI-Hub 제공 .json 파일 YOLO .txt 형식으로 변환'
+    print('.json파일 .txt로 변환 시작')
     for count, filename in enumerate(os.listdir(folder_path)):
         if filename.endswith(".json"):
             file_path = os.path.join(folder_path, filename)
@@ -31,7 +32,7 @@ def convert_to_yolo_txt_det(folder_path):
 
             yolo_bboxes = []
             for annotation in annotations:
-                bbox = annotation['points']
+                bbox = annotation['points'] # xywh
                 yolo_bbox = convert_to_yolo_det(bbox, image_width, image_height)
                 yolo_bboxes.append((annotation['PM_code'], yolo_bbox))
 
@@ -49,7 +50,7 @@ def convert_to_yolo_txt_det(folder_path):
                 if count % 100 == 0:
                     print(f'{count}번째 파일: {output_file}')
 
-    print('json파일 txt로 변환 완료')
+    print('.json파일 .txt로 변환 완료')
 
 if __name__ == '__main__':
     convert_to_yolo_txt_det('데이터/labels_json')
