@@ -14,11 +14,14 @@ def restructure_aihub_data(data_root):
 
     # 디렉터리 구조 재구성
     for count, (root, _, files) in enumerate(os.walk(data_root)):
-        for file in files:
-            new_parent_path = 'labels' if '.json' in file else 'images'
-            os.popen(f'cp {os.path.join(root, file)} {os.path.join(data_root, new_parent_path, file)}')
-            if count % 100 == 0:
-                print(f'{count}번째 파일: {file}')
+        for inner_count, file in enumerate(files):
+            if '.json' in file:
+                new_parent_path = 'labels'
+            elif '.jpg' in file or '.jpeg' in file:
+                new_parent_path = 'images'
+            os.replace(os.path.join(root, file), os.path.join(data_root, new_parent_path, file))
+            if inner_count % 100 == 0:
+                print(f'{count} 구조 안 {inner_count}번째 파일: {file}')
 
     print('디렉터리 구조 변경 완료')
 
