@@ -6,6 +6,7 @@ def restructure_aihub_data(data_root):
     원천데이터 -> images폴더 안 name.jpg
     라벨링데이터 -> labels폴더 안 name.json
     '''
+    print('디렉터리 구조 변경 시작')
     # images, labels 폴더 없으면 생성
     parent_paths = [os.path.join(data_root, parent) for parent in ['images', 'labels']]
     for parent_path in parent_paths:
