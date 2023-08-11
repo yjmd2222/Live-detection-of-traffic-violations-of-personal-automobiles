@@ -19,7 +19,10 @@ def restructure_aihub_data(data_root):
                 new_parent_path = 'labels'
             elif '.jpg' in file or '.jpeg' in file:
                 new_parent_path = 'images'
-            os.replace(os.path.join(root, file), os.path.join(data_root, new_parent_path, file))
+            try:
+                os.replace(os.path.join(root, file), os.path.join(data_root, new_parent_path, file))
+            except UnboundLocalError:
+                continue
             if inner_count % 100 == 0:
                 print(f'{count} 구조 안 {inner_count}번째 파일: {file}')
 
