@@ -1,0 +1,9 @@
+# Dataset paths relative to the train folder
+train: ../데이터/images/train
+val:   ../데이터/images/val
+test:  ../데이터/images/test
+
+# Class names 0 - cat, 1 - dog
+names: 
+  0: 'cat'
+  1: 'dog'
