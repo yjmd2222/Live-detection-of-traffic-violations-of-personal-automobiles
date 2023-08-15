@@ -1,9 +1,17 @@
+*__pycache__*
 데이터*
 test.ipynb
 test.py
 JSON2YOLO*
+bus.jpg
+catdog*
 data/*
+data-catdog/*
 datasets/*
 download*
 runs*
+VL1.zip
+VS1.zip
+ultralytics*
+yolov5*
 yolo*.pt
