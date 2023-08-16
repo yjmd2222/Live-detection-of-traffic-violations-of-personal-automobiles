@@ -17,3 +17,4 @@ ultralytics*
 yolov5*
 YOLOV8*
 yolo*.pt
+wandb*
