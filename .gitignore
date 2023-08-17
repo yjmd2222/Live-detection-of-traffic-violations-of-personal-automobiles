@@ -14,7 +14,6 @@ runs*
 VL1.zip
 VS1.zip
 ultralytics*
-yolov5*
-YOLOV8*
-yolo*.pt
+yolov5/*
+YOLOV8/*
 wandb*

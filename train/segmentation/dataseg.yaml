@@ -1,0 +1,9 @@
+# Dataset paths relative to the train folder
+train: ../../data/images/train
+val:   ../../data/images/val
+test:  ../../data/images/test
+
+names: 
+  ['인도', '횡단보도', '자전거 도로', '교차로',
+  '중앙 차선', '안전 지대', '정지선', '정지선 위반 판별 구역',
+  '보행자 신호등_녹색', '보행자 신호등_적색', '차량 신호등_녹색', '차량 신호등_적색']
