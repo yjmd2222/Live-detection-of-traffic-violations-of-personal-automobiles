@@ -11,7 +11,7 @@ def convert_to_yolo_seg(polygon, image_width, image_height):
     주의: y-x 순서
     '''
     # width, height으로 나누어 0-1 사이로 정규화
-    polygon = list(map((lambda point: [point[0]/image_height, point[1]/image_width]),polygon))
+    polygon = list(map((lambda point: [point[1]/image_width, point[0]/image_height]),polygon))
 
     return polygon
 
