@@ -9,7 +9,7 @@
     - labels
         - ...
 - 모델종류
-    - output폴더
+    - config
         - test_result.ipynb
         - runs
             - ...
