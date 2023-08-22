@@ -18,7 +18,7 @@ def sample_files():
             old_json_root = old_image_root.replace('images', 'labels_json')
             old_det_txt_root = old_json_root.replace('_json', '_det')
             old_seg_txt_root = old_det_txt_root.replace('_det', '_seg')
-            new_image_root = old_image_root.replace('images', 'images_samples')
+            new_image_root = old_image_root.replace('images', 'images_sample')
             new_json_root = new_image_root.replace('images', 'labels_json')
             new_det_txt_root = new_json_root.replace('_json', '_det')
             new_seg_txt_root = new_det_txt_root.replace('_det', '_seg')

@@ -1,4 +1,8 @@
-'레이블 polygon 데이터로 4번째 채널 만들어서 이미지 병합'
+'''
+레이블 polygon 데이터로 4번째 채널 만들어서 이미지 병합\n
+main(기존이미지전체폴더경로, 새로운이미지전체폴더경로, merge=True)\n
+merge==True는 4차원 이미지 생성, merge==False는 1차원 이미지 생성
+'''
 import cv2
 import os
 import numpy as np
@@ -12,7 +16,7 @@ def add_polygon_channel(old_image_root, new_image_root, progress_bar, merge, fil
     '이미지에 polygon 추가'
     file: str
     # 파일 확인: dir
-    if os.path.isdir(file):
+    if os.path.isdir(os.path.join(old_image_root, file)):
         progress_bar.update(1)
         return
     # 파일 확인: 기타 파일
@@ -24,7 +28,7 @@ def add_polygon_channel(old_image_root, new_image_root, progress_bar, merge, fil
         # path 생성
         old_image_file_path = os.path.join(old_image_root, file)
         new_image_file_path = os.path.join(new_image_root, file).replace('jpg', 'png').replace('jpeg', 'png')
-        txt_file_path = old_image_file_path.replace('jpg', 'txt').replace('jpeg', 'txt').replace('images_raw', 'labels_seg_all')
+        txt_file_path = old_image_file_path.replace('jpg', 'txt').replace('jpeg', 'txt').replace('images_sample', 'labels_seg_sample')
     # 원본이미지로부터 dim 추출
     raw_image = cv2.imread(old_image_file_path)
     height, width = raw_image.shape[:2]
@@ -62,4 +66,4 @@ def main(old_path, new_path, merge):
         progress_bar.close()
 
 if __name__ == '__main__':
-    main('data/images_raw', 'D:/data/images_seg_four', True)
+    main('data/images_sample', 'data/images_seg_four_sample', True)
