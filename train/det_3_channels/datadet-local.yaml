@@ -1,8 +1,7 @@
 # Dataset paths relative to the train folder
-path:  /kaggle/input/640360/images
-train: train
-val:   val
-test:  test
+train: ../../data/images/train
+val:   ../../data/images/val
+test:  ../../data/images/test
 
 names: 
   ['오토바이','오토바이 보행자도로 통행','오토바이 안전모 미착용','오토바이 무단횡단','오토바이 신호 위반','오토바이 정지선 위반','오토바이 횡단보도 주행',
