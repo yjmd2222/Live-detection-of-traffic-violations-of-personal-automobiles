@@ -64,4 +64,5 @@ def main(old_path, new_path, txt_path, merge):
         progress_bar.close()
 
 if __name__ == '__main__':
-    main('data/images_sample', 'data/images_seg_four_sample', 'data/labels_seg', True)
+    # main('data/images_sample', 'data/images_seg_four_sample', 'data/labels_seg', True)
+    main('data/images', 'data/ir', 'data/labels_seg', False)
