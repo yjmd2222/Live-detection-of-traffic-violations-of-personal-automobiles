@@ -18,7 +18,7 @@ def restructure_aihub_data(data_root):
         for inner_count, file in enumerate(files):
             if '.json' in file:
                 new_parent_path = 'labels_json'
-            elif '.jpg' in file or '.jpeg' in file:
+            elif any([file.endswith(ext) for ext in ['jpg','jpeg','png']]):
                 new_parent_path = 'images'
             try:
                 os.replace(os.path.join(root, file), os.path.join(data_root, new_parent_path, file))

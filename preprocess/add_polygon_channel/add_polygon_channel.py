@@ -8,14 +8,16 @@ import os
 import numpy as np
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor
+
+import sys
+sys.path.append('.')
 from preprocess.restructure._settings import seg_yolo_to_aihub_mapper
 
 def add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, merge, file):
     '이미지에 polygon 추가'
     file: str
     # 파일 확인: dir or 기타파일
-    if os.path.isdir(os.path.join(old_image_root, file)) or not (file.endswith('jpg') or file.endswith('jpeg')):
-        print('')
+    if os.path.isdir(os.path.join(old_image_root, file)) or not any([file.endswith(ext) for ext in ['jpg','jpeg','png']]):
         progress_bar.update(1)
         return
     # 파일 확인: jpg
@@ -23,8 +25,8 @@ def add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, 
         pass
     # path 생성
     old_image_file_path = os.path.join(old_image_root, file)
-    new_image_file_path = os.path.join(new_image_root, file)
-    txt_file_path = old_image_file_path.replace(old_image_root, txt_root).replace('jpg', 'txt').replace('jpeg', 'txt')
+    new_image_file_path = os.path.join(new_image_root, file).split('.')[0] + '.png'
+    txt_file_path = old_image_file_path.replace(old_image_root, txt_root).split('.')[0] + '.txt'
     # 원본이미지로부터 dim 추출
     raw_image = cv2.imread(old_image_file_path)
     height, width = raw_image.shape[:2]
@@ -46,7 +48,6 @@ def add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, 
     os.makedirs(new_parent_path, exist_ok=True)
     if merge:
         merged_image = cv2.merge((raw_image, fc_image))
-        new_image_file_path = new_image_file_path.replace('jpg', 'png').replace('jpeg', 'png')
         cv2.imwrite(new_image_file_path, merged_image)
     else:
         cv2.imwrite(new_image_file_path, fc_image)
@@ -65,4 +66,4 @@ def main(old_path, new_path, txt_path, merge):
 
 if __name__ == '__main__':
     # main('data/images_sample', 'data/images_seg_four_sample', 'data/labels_seg', True)
-    main('data/images', 'data/ir', 'data/labels_seg', False)
+    main('data/images_resize_png', 'data/ir', 'data/labels_seg', False)
