@@ -1,0 +1,24 @@
+description: Ultralytics YOLOv8n-seg model trained on /kaggle/input/wtwtwt/dataseg.yaml
+author: Ultralytics
+license: AGPL-3.0 https://ultralytics.com/license
+date: '2023-09-02T22:10:09.498459'
+version: 8.0.168
+stride: 32
+task: segment
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: 인도
+  1: 횡단보도
+  2: 자전거 도로
+  3: 교차로
+  4: 중앙 차선
+  5: 안전 지대
+  6: 정지선
+  7: 정지선 위반 판별 구역
+  8: 보행자 신호등_녹색
+  9: 보행자 신호등_적색
+  10: 차량 신호등_녹색
+  11: 차량 신호등_적색
