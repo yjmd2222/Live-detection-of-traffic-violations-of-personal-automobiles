@@ -13,7 +13,7 @@ import sys
 sys.path.append('.')
 from preprocess.restructure._settings import seg_yolo_to_aihub_mapper
 
-def add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, merge, file):
+def add_polygon_channel_from_labels(old_image_root, new_image_root, txt_root, progress_bar, merge, file):
     '이미지에 polygon 추가'
     file: str
     # 파일 확인: dir or 기타파일
@@ -42,7 +42,7 @@ def add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, 
             numbers = [float(p) for p in parts[1:]]
             yolo_points = [numbers[i:i+2] for i in range(0,len(numbers),2)]
             pixel_points = np.array([(int(point[0] * width), int(point[1] * height)) for point in yolo_points], dtype=np.int64)
-            cv2.fillPoly(fc_image, [pixel_points], class_id)
+            cv2.fillPoly(fc_image, [pixel_points], class_id*10)
     # 파일 저장
     new_parent_path = os.path.dirname(new_image_file_path)
     os.makedirs(new_parent_path, exist_ok=True)
@@ -61,9 +61,9 @@ def main(old_path, new_path, txt_path, merge):
         txt_root = old_image_root.replace(old_path, txt_path)
         progress_bar = tqdm(total=len(files), desc=old_image_root)
         with ThreadPoolExecutor() as executor:
-            executor.map(lambda file: add_polygon_channel(old_image_root, new_image_root, txt_root, progress_bar, merge, file), files)
+            executor.map(lambda file: add_polygon_channel_from_labels(old_image_root, new_image_root, txt_root, progress_bar, merge, file), files)
         progress_bar.close()
 
 if __name__ == '__main__':
     # main('data/images_sample', 'data/images_seg_four_sample', 'data/labels_seg', True)
-    main('data/images_resize_png', 'data/ir', 'data/labels_seg', False)
+    main('data/images_resize', 'data/generated_4ch_aihub', 'data/labels_seg', True)
