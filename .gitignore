@@ -1,4 +1,7 @@
-*__pycache__*
-data/*
-*.mp4
+/__pycache__
+CCTV.csv
 test.py
+test.ipynb
+test.html
+test.md
+wandb*
